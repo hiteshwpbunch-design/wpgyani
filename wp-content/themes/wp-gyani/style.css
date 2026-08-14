@@ -1,0 +1,215 @@
+/*
+Theme Name: WP Gyani
+Theme URI: https://wpgyani.com
+Author: WP Gyani
+Author URI: https://wpgyani.com
+Description: A modern WordPress knowledge hub theme for tutorials, guides and resources.
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: wp-gyani
+Tags: education, blog, knowledge-base, two-columns, custom-menu
+*/
+
+/* Base styles and CSS Variables for Dark Mode */
+:root {
+    --color-bg-white: #FFFFFF;
+    --color-bg-offwhite: #F7F9F9;
+    --color-text-charcoal: #333333;
+    --color-text-heading: #1F2937;
+    --color-text-muted: #667085;
+    --color-border: #E5E9E9;
+    --color-teal-light: #EAF6F5;
+    --color-teal-subtle: #F2F8F8;
+}
+
+html.dark {
+    --color-bg-white: #111827;
+    --color-bg-offwhite: #1F2937;
+    --color-text-charcoal: #D1D5DB;
+    --color-text-heading: #F9FAFB;
+    --color-text-muted: #9CA3AF;
+    --color-border: #374151;
+    --color-teal-light: rgba(78, 170, 167, 0.1);
+    --color-teal-subtle: rgba(78, 170, 167, 0.05);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-charcoal);
+    background-color: var(--color-bg-white);
+    overflow-x: hidden;
+}
+
+/* Make the main header logo white in dark mode */
+html.dark .custom-logo {
+    filter: invert(1) brightness(100);
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Manrope', sans-serif;
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #F7F9F9;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4EAAA7;
+    border-radius: 4px;
+}
+
+.nav-dropdown {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.has-dropdown:hover .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* WordPress menu dropdown adjustments */
+.main-navigation .menu-item-has-children:hover > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.main-navigation .sub-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.custom-logo { max-height: 50px; width: auto; }
+
+
+/* Awwwards Style Link Animation */
+.awwwards-link {
+    position: relative;
+    display: inline-block;
+    color: #e5e7eb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.awwwards-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #14b8a6;
+    transform-origin: bottom right;
+    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+}
+.awwwards-link:hover {
+    color: #ffffff;
+}
+.awwwards-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Main Navigation Styles */
+.main-navigation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    white-space: nowrap;
+}
+.main-navigation li a {
+    color: var(--color-text-charcoal);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding: 0.5rem;
+}
+.main-navigation li a:hover {
+    color: #14b8a6;
+}
+/* Blog Single Content Styles */
+#single-content {
+    line-height: 1.8;
+}
+#single-content p {
+    margin-bottom: 1rem;
+}
+#single-content h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.875rem; /* Increased from 1.5rem */
+    font-weight: 800;
+    margin-top: 1.75rem; /* Decreased from 2.5rem */
+    margin-bottom: 0.75rem; /* Decreased from 1rem */
+    color: var(--color-text-charcoal);
+}
+#single-content h3 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.35rem; 
+    font-weight: 800;
+    margin-top: 1.5rem; /* Decreased from 2rem */
+    margin-bottom: 0.75rem; /* Decreased from 1rem */
+    color: var(--color-text-charcoal);
+}
+#single-content ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+#single-content ol {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+#single-content li {
+    margin-bottom: 0.5rem;
+}
+#single-content a {
+    color: #14b8a6;
+    font-weight: 600;
+    text-decoration: underline;
+}
+#single-content a:hover {
+    color: #0f766e;
+}
+#single-content blockquote {
+    border-left: 4px solid #14b8a6;
+    background-color: rgba(20, 184, 166, 0.1);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-weight: 600;
+}
+#single-content img {
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e5e7eb;
+}

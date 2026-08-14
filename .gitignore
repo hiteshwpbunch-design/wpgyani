@@ -1,0 +1,9 @@
+# Environment files
+.env
+
+# WP Config (Don't commit passwords!)
+wp-config.php
+
+# OS generated files
+.DS_Store
+Thumbs.db
