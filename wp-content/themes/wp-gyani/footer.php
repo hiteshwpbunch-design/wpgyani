@@ -13,7 +13,7 @@
             </h2>
         </div> -->
 
-        <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-gray-800 relative z-10">
                 <!-- Col 1: Brand Info (Left Side - 5 cols) -->
                 <div class="md:col-span-5 space-y-8 flex flex-col justify-between">
@@ -25,7 +25,7 @@
                                 <span class="font-manrope font-extrabold text-3xl text-teal tracking-tight">WP Gyani</span>
                             <?php endif; ?>
                         </a>
-                        <p class="font-inter text-gray-400 text-lg max-w-md leading-relaxed mt-6">
+                        <p class="font-inter text-gray-400 text-base max-w-md leading-relaxed mt-6">
                             An editorial WordPress knowledge platform delivering practical tutorials, guides, and resources. Elevate your digital presence.
                         </p>
                     </div>
@@ -46,32 +46,32 @@
                 <!-- Navigation Columns (Right Side - 7 cols) -->
                 <div class="md:col-span-7 grid grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="space-y-6">
-                        <h4 class="font-manrope font-bold text-sm uppercase tracking-[0.2em] text-gray-500">WordPress</h4>
-                        <ul class="space-y-4 text-lg">
-                            <li><a href="#latest" class="awwwards-link">Tutorials</a></li>
-                            <li><a href="#guides" class="awwwards-link">Pillar Guides</a></li>
-                            <li><a href="#latest" class="awwwards-link">WordPress Tips</a></li>
-                            <li><a href="#latest" class="awwwards-link">Bug Fixes</a></li>
+                        <h4 class="font-manrope font-extrabold text-lg text-white">WordPress</h4>
+                        <ul class="space-y-3 font-inter text-base">
+                            <li><a href="#latest" class="text-gray-400 hover:text-teal transition-colors">Tutorials</a></li>
+                            <li><a href="#guides" class="text-gray-400 hover:text-teal transition-colors">Pillar Guides</a></li>
+                            <li><a href="#latest" class="text-gray-400 hover:text-teal transition-colors">WordPress Tips</a></li>
+                            <li><a href="#latest" class="text-gray-400 hover:text-teal transition-colors">Bug Fixes</a></li>
                         </ul>
                     </div>
 
                     <div class="space-y-6">
-                        <h4 class="font-manrope font-bold text-sm uppercase tracking-[0.2em] text-gray-500">Resources</h4>
-                        <ul class="space-y-4 text-lg">
-                            <li><a href="#categories" class="awwwards-link">Plugins & Themes</a></li>
-                            <li><a href="#resources" class="awwwards-link">Speed Tools</a></li>
-                            <li><a href="#latest" class="awwwards-link">SEO Checklists</a></li>
-                            <li><a href="#resources" class="awwwards-link">Code Snippets</a></li>
+                        <h4 class="font-manrope font-extrabold text-lg text-white">Resources</h4>
+                        <ul class="space-y-3 font-inter text-base">
+                            <li><a href="#categories" class="text-gray-400 hover:text-teal transition-colors">Plugins & Themes</a></li>
+                            <li><a href="#resources" class="text-gray-400 hover:text-teal transition-colors">Speed Tools</a></li>
+                            <li><a href="#latest" class="text-gray-400 hover:text-teal transition-colors">SEO Checklists</a></li>
+                            <li><a href="#resources" class="text-gray-400 hover:text-teal transition-colors">Code Snippets</a></li>
                         </ul>
                     </div>
 
                     <div class="space-y-6 col-span-2 lg:col-span-1">
-                        <h4 class="font-manrope font-bold text-sm uppercase tracking-[0.2em] text-gray-500">Company</h4>
-                        <ul class="space-y-4 text-lg">
-                            <li><a href="#about" class="awwwards-link">About Us</a></li>
-                            <li><a href="#footer" class="awwwards-link">Contact</a></li>
-                            <li><a href="#newsletter" class="awwwards-link">Advertise</a></li>
-                            <li><a href="#about" class="awwwards-link">Partners</a></li>
+                        <h4 class="font-manrope font-extrabold text-lg text-white">Company</h4>
+                        <ul class="space-y-3 font-inter text-base">
+                            <li><a href="#about" class="text-gray-400 hover:text-teal transition-colors">About Us</a></li>
+                            <li><a href="#footer" class="text-gray-400 hover:text-teal transition-colors">Contact</a></li>
+                            <li><a href="#newsletter" class="text-gray-400 hover:text-teal transition-colors">Advertise</a></li>
+                            <li><a href="#about" class="text-gray-400 hover:text-teal transition-colors">Partners</a></li>
                         </ul>
                     </div>
                 </div>
@@ -94,24 +94,24 @@
     </footer>
 
     <!-- SEARCH MODAL OVERLAY -->
-    <div id="search-modal" class="fixed inset-0 z-50 bg-charcoal/60 backdrop-blur-sm hidden flex items-start justify-center pt-20 px-4">
-        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-modal border border-bordercolor overflow-hidden transform transition-all">
+    <div id="search-modal" class="fixed inset-0 z-50 bg-charcoal/60 dark:bg-black/80 backdrop-blur-sm hidden flex items-start justify-center pt-20 px-4">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-2xl rounded-2xl shadow-modal border border-bordercolor dark:border-gray-700 overflow-hidden transform transition-all">
             <!-- Search Input Header -->
-            <div class="p-4 border-b border-bordercolor flex items-center gap-3 bg-offwhite">
+            <div class="p-4 border-b border-bordercolor dark:border-gray-700 flex items-center gap-3 bg-offwhite dark:bg-gray-800">
                 <svg class="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="What do you want to learn today? (e.g. Speed, Elementor, SEO)" class="w-full bg-transparent text-charcoal font-manrope font-bold text-base focus:outline-none">
-                <button onclick="closeSearchModal()" class="text-xs font-bold text-textmuted hover:text-charcoal px-2 py-1 bg-white border border-bordercolor rounded">ESC</button>
+                <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="What do you want to learn today? (e.g. Speed, Elementor, SEO)" class="w-full bg-transparent text-charcoal dark:text-white font-manrope font-bold text-base focus:outline-none">
+                <button onclick="closeSearchModal()" class="text-xs font-bold text-textmuted dark:text-gray-300 hover:text-charcoal dark:hover:text-white px-2 py-1 bg-white dark:bg-gray-700 border border-bordercolor dark:border-gray-600 rounded">ESC</button>
             </div>
             <!-- Modal Content & Results -->
             <div class="p-6 max-h-[60vh] overflow-y-auto custom-scrollbar">
                 <!-- Recent Searches / Quick Chips -->
                 <div id="search-suggestions" class="space-y-4">
-                    <div class="text-xs font-bold text-textmuted uppercase tracking-wider">Popular Searches</div>
+                    <div class="text-xs font-bold text-textmuted dark:text-gray-400 uppercase tracking-wider">Popular Searches</div>
                     <div class="flex flex-wrap gap-2">
-                        <button onclick="applySearchTag('Speed')" class="px-3 py-1.5 rounded-lg bg-teal-light text-teal-dark font-medium text-xs hover:bg-teal hover:text-[#FFFFFF] transition-colors">WordPress Speed</button>
-                        <button onclick="applySearchTag('Elementor')" class="px-3 py-1.5 rounded-lg bg-teal-light text-teal-dark font-medium text-xs hover:bg-teal hover:text-[#FFFFFF] transition-colors">Elementor Pro</button>
-                        <button onclick="applySearchTag('SEO')" class="px-3 py-1.5 rounded-lg bg-teal-light text-teal-dark font-medium text-xs hover:bg-teal hover:text-[#FFFFFF] transition-colors">Technical SEO</button>
-                        <button onclick="applySearchTag('Database')" class="px-3 py-1.5 rounded-lg bg-teal-light text-teal-dark font-medium text-xs hover:bg-teal hover:text-[#FFFFFF] transition-colors">Database Error</button>
+                        <button onclick="applySearchTag('Speed')" class="px-3 py-1.5 rounded-lg bg-teal-light dark:bg-teal-900/30 text-teal-dark dark:text-teal font-medium text-xs hover:bg-teal hover:text-[#FFFFFF] transition-colors">WordPress Speed</button>
+                        <button onclick="applySearchTag('Elementor')" class="px-3 py-1.5 rounded-lg bg-teal-light dark:bg-teal-900/30 text-teal-dark dark:text-teal font-medium text-xs hover:bg-teal hover:text-[#FFFFFF] transition-colors">Elementor Pro</button>
+                        <button onclick="applySearchTag('SEO')" class="px-3 py-1.5 rounded-lg bg-teal-light dark:bg-teal-900/30 text-teal-dark dark:text-teal font-medium text-xs hover:bg-teal hover:text-[#FFFFFF] transition-colors">Technical SEO</button>
+                        <button onclick="applySearchTag('Database')" class="px-3 py-1.5 rounded-lg bg-teal-light dark:bg-teal-900/30 text-teal-dark dark:text-teal font-medium text-xs hover:bg-teal hover:text-[#FFFFFF] transition-colors">Database Error</button>
                     </div>
                 </div>
                 <!-- Dynamic Results Area -->
@@ -121,15 +121,15 @@
     </div>
 
     <!-- ARTICLE READER VIEW MODAL -->
-    <div id="article-modal" class="fixed inset-0 z-50 bg-charcoal/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-3xl rounded-2xl shadow-modal border border-bordercolor max-h-[90vh] flex flex-col overflow-hidden">
-            <div class="p-4 border-b border-bordercolor flex items-center justify-between bg-offwhite">
+    <div id="article-modal" class="fixed inset-0 z-50 bg-charcoal/70 dark:bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-3xl rounded-2xl shadow-modal border border-bordercolor dark:border-gray-700 max-h-[90vh] flex flex-col overflow-hidden">
+            <div class="p-4 border-b border-bordercolor dark:border-gray-700 flex items-center justify-between bg-offwhite dark:bg-gray-800">
                 <div class="flex items-center gap-2 text-xs font-bold text-teal" id="modal-category">WORDPRESS PERFORMANCE</div>
-                <button onclick="closeArticleModal()" class="text-charcoal hover:text-teal font-bold text-sm p-1">&times; Close</button>
+                <button onclick="closeArticleModal()" class="text-charcoal dark:text-white hover:text-teal font-bold text-sm p-1">&times; Close</button>
             </div>
             <div class="p-6 md:p-8 overflow-y-auto custom-scrollbar space-y-6">
-                <h2 id="modal-title" class="font-manrope font-extrabold text-2xl md:text-3xl text-charcoal">Article Title Placeholder</h2>
-                <div class="flex items-center gap-4 text-xs text-textmuted pb-4 border-b border-bordercolor">
+                <h2 id="modal-title" class="font-manrope font-extrabold text-2xl md:text-3xl text-charcoal dark:text-white">Article Title Placeholder</h2>
+                <div class="flex items-center gap-4 text-xs text-textmuted dark:text-gray-400 pb-4 border-b border-bordercolor dark:border-gray-700">
                     <span>By Rahul Sharma</span>
                     <span>&bull;</span>
                     <span>Updated Aug 2026</span>
@@ -137,14 +137,15 @@
                     <span class="text-teal font-semibold">12 min read</span>
                 </div>
                 <!-- Article Body Content Demo -->
-                <div class="space-y-4 text-charcoal font-inter text-base leading-relaxed">
+                <div class="space-y-4 text-charcoal dark:text-gray-300 font-inter text-base leading-relaxed">
                     <p>Building a fast, modern WordPress site requires a deep understanding of core web vitals, server caching strategies, and asset optimization.</p>
-                    <div class="p-4 rounded-xl bg-teal-light border-l-4 border-teal text-sm text-teal-dark font-medium"><strong>Pro Tip:</strong> Always defer non-critical JavaScript files and load critical CSS inline to achieve a green LCP (Largest Contentful Paint) score.</div>
+                    <div class="p-4 rounded-xl bg-teal-light dark:bg-teal-900/30 border-l-4 border-teal text-sm text-teal-dark dark:text-teal font-medium"><strong>Pro Tip:</strong> Always defer non-critical JavaScript files and load critical CSS inline to achieve a green LCP (Largest Contentful Paint) score.</div>
                     <p>In this guide, we break down step-by-step how to audit database queries, eliminate heavy plugins, and leverage modern web standards.</p>
                 </div>
             </div>
-            <div class="p-4 border-t border-bordercolor bg-offwhite text-right">
-                <button onclick="closeArticleModal()" class="px-5 py-2.5 rounded-xl bg-teal text-[#FFFFFF] font-manrope font-bold text-sm hover:bg-teal-dark">Done Reading</button>
+            <div class="p-4 border-t border-bordercolor dark:border-gray-700 bg-offwhite dark:bg-gray-800 flex justify-between items-center">
+                <button onclick="closeArticleModal()" class="text-charcoal dark:text-white hover:text-teal font-bold text-sm">Close</button>
+                <a href="#" id="modal-link" class="px-5 py-2.5 rounded-xl bg-teal text-[#FFFFFF] font-manrope font-bold text-sm hover:bg-teal-dark">Read Full Article</a>
             </div>
         </div>
     </div>

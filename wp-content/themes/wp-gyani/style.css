@@ -213,3 +213,73 @@ h1, h2, h3, h4, h5, h6, .font-heading {
     margin-bottom: 1.5rem;
     border: 1px solid #e5e7eb;
 }
+
+/* Contact Form 7 Custom Styles - Theme Colored Background Layout */
+.theme-colored-form-wrapper label {
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 12px;
+}
+.theme-colored-form-wrapper .wpcf7-form-control-wrap {
+    display: block;
+    margin-bottom: 16px;
+}
+.theme-colored-form-wrapper .wpcf7-text,
+.theme-colored-form-wrapper .wpcf7-select {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    color: #2D3748;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.theme-colored-form-wrapper .wpcf7-text::placeholder,
+.theme-colored-form-wrapper .wpcf7-textarea::placeholder {
+    color: #A0AEC0; /* gray-400 */
+}
+.theme-colored-form-wrapper .wpcf7-textarea {
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    color: #2D3748;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    height: 80px;
+    min-height: 80px;
+    resize: vertical;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.theme-colored-form-wrapper .wpcf7-text:focus,
+.theme-colored-form-wrapper .wpcf7-textarea:focus,
+.theme-colored-form-wrapper .wpcf7-select:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.4);
+}
+.theme-colored-form-wrapper .wpcf7-submit {
+    background-color: #1a202c;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.theme-colored-form-wrapper .wpcf7-submit:hover {
+    background-color: #2d3748;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}

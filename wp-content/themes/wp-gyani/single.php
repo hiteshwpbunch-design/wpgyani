@@ -52,14 +52,14 @@ while (have_posts()): the_post();
     <main id="primary" class="site-main">
 
         <!-- POST HERO -->
-        <section id="post-hero" class="relative bg-gradient-to-b from-teal-light/60 via-offwhite to-white border-b border-bordercolor pt-8 pb-10 md:pt-12 md:pb-14 overflow-hidden">
-            <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#333333 1px, transparent 1px); background-size: 22px 22px;"></div>
+        <section id="post-hero" class="relative bg-gradient-to-br from-teal-light via-white to-teal-subtle dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-bordercolor dark:border-gray-800 pt-8 pb-10 md:pt-12 md:pb-14 overflow-hidden">
+            <div class="absolute inset-0 opacity-[0.03] dark:opacity-10 pointer-events-none" style="background-image: radial-gradient(#333333 1px, transparent 1px); background-size: 22px 22px;"></div>
 
             <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
 
                 <!-- Breadcrumb -->
                 <nav aria-label="Breadcrumb" class="mb-5">
-                    <ol class="flex items-center flex-wrap gap-1.5 text-xs font-medium text-textmuted" itemscope itemtype="https://schema.org/BreadcrumbList">
+                    <ol class="flex items-center flex-wrap gap-1.5 text-xs font-medium text-textmuted dark:text-gray-400" itemscope itemtype="https://schema.org/BreadcrumbList">
                         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                             <a href="<?php echo esc_url(home_url('/')); ?>" itemprop="item" class="hover:text-teal transition-colors">
                                 <span itemprop="name">Home</span>
@@ -67,7 +67,7 @@ while (have_posts()): the_post();
                             <meta itemprop="position" content="1">
                         </li>
                         <?php if ($primary_cat): ?>
-                            <li class="text-bordercolor" aria-hidden="true">/</li>
+                            <li class="text-bordercolor dark:text-gray-600" aria-hidden="true">/</li>
                             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                                 <a href="<?php echo esc_url(get_category_link($primary_cat)); ?>" itemprop="item" class="hover:text-teal transition-colors">
                                     <span itemprop="name"><?php echo esc_html($primary_cat->name); ?></span>
@@ -75,8 +75,8 @@ while (have_posts()): the_post();
                                 <meta itemprop="position" content="2">
                             </li>
                         <?php endif; ?>
-                        <li class="text-bordercolor" aria-hidden="true">/</li>
-                        <li class="text-charcoal font-semibold truncate max-w-[220px] sm:max-w-none" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <li class="text-bordercolor dark:text-gray-600" aria-hidden="true">/</li>
+                        <li class="text-charcoal dark:text-gray-200 font-semibold truncate max-w-[220px] sm:max-w-none" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                             <span itemprop="name"><?php the_title(); ?></span>
                             <meta itemprop="item" content="<?php the_permalink(); ?>">
                             <meta itemprop="position" content="<?php echo $primary_cat ? '3' : '2'; ?>">
@@ -91,31 +91,31 @@ while (have_posts()): the_post();
                     </a>
                 <?php endif; ?>
 
-                <h1 class="font-manrope font-extrabold text-2xl sm:text-3xl md:text-4xl text-charcoal mt-4 leading-[1.3] tracking-tight">
+                <h1 class="font-manrope font-extrabold text-2xl sm:text-3xl md:text-4xl text-charcoal dark:text-white mt-4 leading-[1.3] tracking-tight">
                     <?php the_title(); ?>
                 </h1>
 
                 <?php if (has_excerpt()): ?>
-                    <p class="font-inter text-textmuted text-lg mt-4 leading-relaxed"><?php echo esc_html(get_the_excerpt()); ?></p>
+                    <p class="font-inter text-textmuted dark:text-gray-400 text-lg mt-4 leading-relaxed"><?php echo esc_html(get_the_excerpt()); ?></p>
                 <?php endif; ?>
 
                 <!-- Author + meta row -->
-                <div class="flex items-center flex-wrap justify-between gap-4 mt-7 pt-6 border-t border-bordercolor/70">
+                <div class="flex items-center flex-wrap justify-between gap-4 mt-7 pt-6 border-t border-bordercolor/70 dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <?php echo get_avatar($author_id, 48, '', '', array('class' => 'rounded-full border-2 border-[#FFFFFF] shadow-soft flex-shrink-0')); ?>
+                        <?php echo get_avatar($author_id, 48, '', '', array('class' => 'rounded-full border-2 border-[#FFFFFF] dark:border-gray-800 shadow-soft flex-shrink-0')); ?>
                         <div class="leading-tight">
-                            <a href="<?php echo esc_url(get_author_posts_url($author_id)); ?>" class="font-manrope font-bold text-sm text-charcoal hover:text-teal transition-colors"><?php the_author(); ?></a>
-                            <div class="text-xs text-textmuted mt-0.5"><?php echo get_the_date(); ?> &bull; <?php echo (int) $reading_time; ?> min read</div>
+                            <a href="<?php echo esc_url(get_author_posts_url($author_id)); ?>" class="font-manrope font-bold text-sm text-charcoal dark:text-white hover:text-teal transition-colors"><?php the_author(); ?></a>
+                            <div class="text-xs text-textmuted dark:text-gray-500 mt-0.5"><?php echo get_the_date(); ?> &bull; <?php echo (int) $reading_time; ?> min read</div>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on X / Twitter" class="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-bordercolor text-charcoal hover:border-teal hover:text-teal transition-all">
+                        <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on X / Twitter" class="w-9 h-9 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal transition-all">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" class="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-bordercolor text-charcoal hover:border-teal hover:text-teal transition-all">
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" class="w-9 h-9 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal transition-all">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.446-2.136 2.94v5.666H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 11.001-4.124 2.062 2.062 0 01-.001 4.124zM7.114 20.452H3.558V9h3.556v11.452z"/></svg>
                         </a>
-                        <button id="bookmark-btn" onclick="wpGyaniToggleBookmark(<?php echo (int) $post_id; ?>)" aria-label="Save for later" class="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-bordercolor text-charcoal hover:border-teal hover:text-teal transition-all">
+                        <button id="bookmark-btn" onclick="wpGyaniToggleBookmark(<?php echo (int) $post_id; ?>)" aria-label="Save for later" class="w-9 h-9 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal transition-all">
                             <svg id="bookmark-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
                         </button>
                     </div>
@@ -133,27 +133,27 @@ while (have_posts()): the_post();
 
                         <!-- FLOATING SHARE / SAVE RAIL (desktop only) -->
                         <div class="hidden lg:flex flex-col items-center gap-2 sticky top-28 flex-shrink-0">
-                            <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on X / Twitter" class="w-10 h-10 flex items-center justify-center rounded-full border border-bordercolor text-charcoal hover:border-teal hover:text-teal hover:-translate-y-0.5 transition-all">
+                            <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on X / Twitter" class="w-10 h-10 flex items-center justify-center rounded-full border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal hover:-translate-y-0.5 transition-all">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                             </a>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" class="w-10 h-10 flex items-center justify-center rounded-full border border-bordercolor text-charcoal hover:border-teal hover:text-teal hover:-translate-y-0.5 transition-all">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" class="w-10 h-10 flex items-center justify-center rounded-full border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal hover:-translate-y-0.5 transition-all">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
                             </a>
-                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" class="w-10 h-10 flex items-center justify-center rounded-full border border-bordercolor text-charcoal hover:border-teal hover:text-teal hover:-translate-y-0.5 transition-all">
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" class="w-10 h-10 flex items-center justify-center rounded-full border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal hover:-translate-y-0.5 transition-all">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.446-2.136 2.94v5.666H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 11.001-4.124 2.062 2.062 0 01-.001 4.124zM7.114 20.452H3.558V9h3.556v11.452z"/></svg>
                             </a>
-                            <button onclick="wpGyaniCopyLink()" aria-label="Copy link" class="w-10 h-10 flex items-center justify-center rounded-full border border-bordercolor text-charcoal hover:border-teal hover:text-teal hover:-translate-y-0.5 transition-all">
+                            <button onclick="wpGyaniCopyLink()" aria-label="Copy link" class="w-10 h-10 flex items-center justify-center rounded-full border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal hover:-translate-y-0.5 transition-all">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5M10.172 13.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"/></svg>
                             </button>
-                            <div class="w-8 h-px bg-bordercolor my-1"></div>
-                            <div class="text-[10px] font-bold text-textmuted [writing-mode:vertical-rl] tracking-widest uppercase">Share</div>
+                            <div class="w-8 h-px bg-bordercolor dark:bg-gray-700 my-1"></div>
+                            <div class="text-[10px] font-bold text-textmuted dark:text-gray-400 [writing-mode:vertical-rl] tracking-widest uppercase">Share</div>
                         </div>
 
-                        <article <?php post_class('bg-white flex-1 min-w-0'); ?> itemscope itemtype="https://schema.org/BlogPosting">
+                        <article <?php post_class('bg-white dark:bg-transparent flex-1 min-w-0'); ?> itemscope itemtype="https://schema.org/BlogPosting">
 
                             <!-- FEATURED IMAGE -->
                             <?php if (has_post_thumbnail()): ?>
-                                <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-teal-light border border-bordercolor mb-8">
+                                <div class="relative aspect-[16/9] rounded-2xl overflow-hidden bg-teal-light dark:bg-gray-800 border border-bordercolor dark:border-gray-700 mb-8">
                                     <?php the_post_thumbnail('large', array(
                                         'class'    => 'w-full h-full object-cover',
                                         'alt'      => get_the_title(),
@@ -163,63 +163,63 @@ while (have_posts()): the_post();
                             <?php endif; ?>
 
                             <!-- KEY TAKEAWAYS -->
-                            <div class="p-5 md:p-6 rounded-2xl bg-teal-light/60 border border-teal/20 mb-8">
+                            <div class="p-5 md:p-6 rounded-2xl bg-teal-light/60 dark:bg-teal-900/20 border border-teal/20 dark:border-teal/30 mb-8">
                                 <div class="flex items-center gap-2 mb-2">
-                                    <svg class="w-4 h-4 text-teal-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-                                    <span class="text-xs font-bold font-manrope uppercase tracking-widest text-teal-dark">Key Takeaway</span>
+                                    <svg class="w-4 h-4 text-teal-dark dark:text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                    <span class="text-xs font-bold font-manrope uppercase tracking-widest text-teal-dark dark:text-teal">Key Takeaway</span>
                                 </div>
-                                <p class="font-inter text-charcoal text-sm md:text-base leading-relaxed"><?php echo esc_html($takeaway); ?></p>
+                                <p class="font-inter text-charcoal dark:text-gray-300 text-sm md:text-base leading-relaxed"><?php echo esc_html($takeaway); ?></p>
                             </div>
 
                             <!-- Article body -->
-                            <div class="prose max-w-none font-inter text-base md:text-[17px] leading-[1.85] text-charcoal
-                                        prose-headings:font-manrope prose-headings:font-extrabold prose-headings:text-charcoal prose-headings:scroll-mt-24
+                            <div class="prose max-w-none font-inter text-base md:text-[17px] leading-[1.85] text-charcoal dark:text-gray-300
+                                        prose-headings:font-manrope prose-headings:font-extrabold prose-headings:text-charcoal prose-headings:dark:text-white prose-headings:scroll-mt-24
                                         prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
                                         prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
-                                        prose-a:text-teal prose-a:font-semibold prose-a:no-underline hover:prose-a:underline hover:prose-a:text-teal-dark
-                                        prose-strong:text-charcoal
-                                        prose-img:rounded-xl prose-img:border prose-img:border-bordercolor
-                                        prose-blockquote:border-l-4 prose-blockquote:border-l-teal prose-blockquote:bg-teal-light/50 prose-blockquote:not-italic prose-blockquote:font-manrope prose-blockquote:font-semibold prose-blockquote:text-charcoal prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-xl
-                                        prose-code:text-teal-dark prose-code:bg-teal-light prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none"
+                                        prose-a:text-teal prose-a:font-semibold prose-a:no-underline hover:prose-a:underline hover:prose-a:text-teal-dark dark:hover:prose-a:text-teal-light
+                                        prose-strong:text-charcoal prose-strong:dark:text-white
+                                        prose-img:rounded-xl prose-img:border prose-img:border-bordercolor prose-img:dark:border-gray-700
+                                        prose-blockquote:border-l-4 prose-blockquote:border-l-teal prose-blockquote:bg-teal-light/50 prose-blockquote:dark:bg-teal-900/30 prose-blockquote:not-italic prose-blockquote:font-manrope prose-blockquote:font-semibold prose-blockquote:text-charcoal prose-blockquote:dark:text-white prose-blockquote:py-3 prose-blockquote:px-5 prose-blockquote:rounded-r-xl
+                                        prose-code:text-teal-dark prose-code:dark:text-teal prose-code:bg-teal-light prose-code:dark:bg-teal-900/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm prose-code:before:content-none prose-code:after:content-none"
                                  itemprop="articleBody" id="single-content">
                                 <?php the_content(); ?>
                             </div>
 
                             <!-- Tags -->
                             <?php $tags = get_the_tags(); if ($tags): ?>
-                                <div class="flex flex-wrap items-center gap-2 mt-10 pt-8 border-t border-bordercolor">
-                                    <span class="text-xs font-bold font-manrope uppercase tracking-widest text-textmuted mr-1">Tagged</span>
+                                <div class="flex flex-wrap items-center gap-2 mt-10 pt-8 border-t border-bordercolor dark:border-gray-700">
+                                    <span class="text-xs font-bold font-manrope uppercase tracking-widest text-textmuted dark:text-gray-400 mr-1">Tagged</span>
                                     <?php foreach ($tags as $tag): ?>
-                                        <a href="<?php echo esc_url(get_tag_link($tag)); ?>" class="px-3 py-1.5 rounded-lg bg-offwhite text-charcoal font-medium text-xs hover:bg-teal-light hover:text-teal-dark transition-colors border border-bordercolor">#<?php echo esc_html($tag->name); ?></a>
+                                        <a href="<?php echo esc_url(get_tag_link($tag)); ?>" class="px-3 py-1.5 rounded-lg bg-offwhite dark:bg-gray-800 text-charcoal dark:text-gray-300 font-medium text-xs hover:bg-teal-light dark:hover:bg-gray-700 hover:text-teal-dark dark:hover:text-white transition-colors border border-bordercolor dark:border-gray-700">#<?php echo esc_html($tag->name); ?></a>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
 
                             <!-- Mobile share / reaction bar -->
-                            <div class="flex lg:hidden items-center justify-between mt-8 pt-6 border-t border-bordercolor">
-                                <span class="text-xs font-bold font-manrope uppercase tracking-widest text-textmuted">Share this article</span>
+                            <div class="flex lg:hidden items-center justify-between mt-8 pt-6 border-t border-bordercolor dark:border-gray-700">
+                                <span class="text-xs font-bold font-manrope uppercase tracking-widest text-textmuted dark:text-gray-400">Share this article</span>
                                 <div class="flex items-center gap-2">
-                                    <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on X / Twitter" class="w-9 h-9 flex items-center justify-center rounded-lg border border-bordercolor text-charcoal hover:border-teal hover:text-teal transition-all">
+                                    <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode(get_permalink()); ?>&text=<?php echo urlencode(get_the_title()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on X / Twitter" class="w-9 h-9 flex items-center justify-center rounded-lg border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal transition-all">
                                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                                     </a>
-                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" class="w-9 h-9 flex items-center justify-center rounded-lg border border-bordercolor text-charcoal hover:border-teal hover:text-teal transition-all">
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode(get_permalink()); ?>" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" class="w-9 h-9 flex items-center justify-center rounded-lg border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal transition-all">
                                         <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
                                     </a>
-                                    <button onclick="wpGyaniCopyLink()" aria-label="Copy link" class="w-9 h-9 flex items-center justify-center rounded-lg border border-bordercolor text-charcoal hover:border-teal hover:text-teal transition-all">
+                                    <button onclick="wpGyaniCopyLink()" aria-label="Copy link" class="w-9 h-9 flex items-center justify-center rounded-lg border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 hover:border-teal hover:text-teal transition-all">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 01-5.656-5.656l1.5-1.5M10.172 13.828a4 4 0 010-5.656l3-3a4 4 0 015.656 5.656l-1.5 1.5"/></svg>
                                     </button>
                                 </div>
                             </div>
 
                             <!-- AUTHOR BIO CARD -->
-                            <div class="mt-10 p-6 md:p-8 rounded-2xl bg-offwhite border border-bordercolor flex flex-col sm:flex-row items-start gap-5">
-                                <?php echo get_avatar($author_id, 72, '', '', array('class' => 'rounded-full border border-bordercolor flex-shrink-0')); ?>
+                            <div class="mt-10 p-6 md:p-8 rounded-2xl bg-offwhite dark:bg-gray-800 border border-bordercolor dark:border-gray-700 flex flex-col sm:flex-row items-start gap-5">
+                                <?php echo get_avatar($author_id, 72, '', '', array('class' => 'rounded-full border border-bordercolor dark:border-gray-600 flex-shrink-0')); ?>
                                 <div>
                                     <div class="text-xs font-bold font-manrope uppercase tracking-widest text-teal mb-1">Written by</div>
-                                    <div class="font-manrope font-extrabold text-lg text-charcoal">
+                                    <div class="font-manrope font-extrabold text-lg text-charcoal dark:text-white">
                                         <a href="<?php echo esc_url(get_author_posts_url($author_id)); ?>" class="hover:text-teal transition-colors"><?php the_author(); ?></a>
                                     </div>
-                                    <p class="font-inter text-textmuted text-sm mt-2 leading-relaxed">
+                                    <p class="font-inter text-textmuted dark:text-gray-400 text-sm mt-2 leading-relaxed">
                                         <?php echo $author_bio ? esc_html($author_bio) : 'Contributor at WP Gyani, writing practical WordPress tutorials on speed, Elementor, SEO and troubleshooting.'; ?>
                                     </p>
                                 </div>
@@ -233,22 +233,22 @@ while (have_posts()): the_post();
                             ?>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                                     <?php if ($prev_post): ?>
-                                        <a href="<?php echo esc_url(get_permalink($prev_post)); ?>" class="group p-5 rounded-2xl border border-bordercolor bg-white hover:border-teal hover:shadow-card-hover transition-all">
-                                            <span class="text-[10px] font-bold font-manrope uppercase tracking-widest text-textmuted flex items-center gap-1.5">
+                                        <a href="<?php echo esc_url(get_permalink($prev_post)); ?>" class="group p-5 rounded-2xl border border-bordercolor dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-teal dark:hover:border-teal hover:shadow-card-hover transition-all">
+                                            <span class="text-[10px] font-bold font-manrope uppercase tracking-widest text-textmuted dark:text-gray-400 flex items-center gap-1.5">
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                                 Previous Article
                                             </span>
-                                            <span class="block mt-2 font-manrope font-bold text-sm text-charcoal group-hover:text-teal transition-colors line-clamp-2"><?php echo esc_html(get_the_title($prev_post)); ?></span>
+                                            <span class="block mt-2 font-manrope font-bold text-sm text-charcoal dark:text-white group-hover:text-teal dark:group-hover:text-teal transition-colors line-clamp-2"><?php echo esc_html(get_the_title($prev_post)); ?></span>
                                         </a>
                                     <?php else: ?><div></div><?php endif; ?>
 
                                     <?php if ($next_post): ?>
-                                        <a href="<?php echo esc_url(get_permalink($next_post)); ?>" class="group p-5 rounded-2xl border border-bordercolor bg-white hover:border-teal hover:shadow-card-hover transition-all text-right">
-                                            <span class="text-[10px] font-bold font-manrope uppercase tracking-widest text-textmuted flex items-center justify-end gap-1.5">
+                                        <a href="<?php echo esc_url(get_permalink($next_post)); ?>" class="group p-5 rounded-2xl border border-bordercolor dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-teal dark:hover:border-teal hover:shadow-card-hover transition-all text-right">
+                                            <span class="text-[10px] font-bold font-manrope uppercase tracking-widest text-textmuted dark:text-gray-400 flex items-center justify-end gap-1.5">
                                                 Next Article
                                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                                             </span>
-                                            <span class="block mt-2 font-manrope font-bold text-sm text-charcoal group-hover:text-teal transition-colors line-clamp-2"><?php echo esc_html(get_the_title($next_post)); ?></span>
+                                            <span class="block mt-2 font-manrope font-bold text-sm text-charcoal dark:text-white group-hover:text-teal dark:group-hover:text-teal transition-colors line-clamp-2"><?php echo esc_html(get_the_title($next_post)); ?></span>
                                         </a>
                                     <?php endif; ?>
                                 </div>
@@ -256,7 +256,7 @@ while (have_posts()): the_post();
 
                             <!-- COMMENTS -->
                             <?php if (comments_open() || get_comments_number()): ?>
-                                <div id="comments-anchor" class="mt-12 pt-10 border-t border-bordercolor">
+                                <div id="comments-anchor" class="mt-12 pt-10 border-t border-bordercolor dark:border-gray-700">
                                     <?php comments_template(); ?>
                                 </div>
                             <?php endif; ?>
@@ -267,12 +267,12 @@ while (have_posts()): the_post();
                     <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
 
                         <!-- TABLE OF CONTENTS with scrollspy (auto-built from H2s via JS) -->
-                        <div id="toc-card" class="p-6 rounded-2xl bg-white border border-bordercolor shadow-soft hidden">
-                            <h3 class="font-manrope font-extrabold text-sm uppercase tracking-wider text-charcoal mb-4 flex items-center gap-2">
+                        <div id="toc-card" class="p-6 rounded-2xl bg-white dark:bg-gray-800 border border-bordercolor dark:border-gray-700 shadow-soft hidden">
+                            <h3 class="font-manrope font-extrabold text-sm uppercase tracking-wider text-charcoal dark:text-white mb-4 flex items-center gap-2">
                                 <svg class="w-4 h-4 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
                                 On This Page
                             </h3>
-                            <ul id="toc-list" class="space-y-1 text-sm font-medium text-textmuted border-l-2 border-bordercolor"></ul>
+                            <ul id="toc-list" class="space-y-1 text-sm font-medium text-textmuted dark:text-gray-400 border-l-2 border-bordercolor dark:border-gray-700"></ul>
                         </div>
 
                         <!-- RELATED ARTICLES -->
@@ -288,14 +288,14 @@ while (have_posts()): the_post();
                             ));
                             if ($related->have_posts()):
                         ?>
-                            <div class="p-6 rounded-2xl bg-white border border-bordercolor shadow-soft">
-                                <h3 class="font-manrope font-extrabold text-sm uppercase tracking-wider text-charcoal mb-4">
+                            <div class="p-6 rounded-2xl bg-white dark:bg-gray-800 border border-bordercolor dark:border-gray-700 shadow-soft">
+                                <h3 class="font-manrope font-extrabold text-sm uppercase tracking-wider text-charcoal dark:text-white mb-4">
                                     More in <?php echo esc_html($primary_cat->name); ?>
-                                </h3>
+                               </h3>
                                 <div class="space-y-4">
                                     <?php while ($related->have_posts()): $related->the_post(); $related_ids[] = get_the_ID(); ?>
                                         <a href="<?php the_permalink(); ?>" class="flex items-center gap-3 group">
-                                            <div class="w-16 h-16 rounded-xl overflow-hidden bg-teal-light flex-shrink-0">
+                                            <div class="w-16 h-16 rounded-xl overflow-hidden bg-teal-light dark:bg-gray-700 flex-shrink-0">
                                                 <?php if (has_post_thumbnail()): ?>
                                                     <?php the_post_thumbnail('thumbnail', array('class' => 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-300')); ?>
                                                 <?php else: ?>
@@ -303,13 +303,13 @@ while (have_posts()): the_post();
                                                 <?php endif; ?>
                                             </div>
                                             <div>
-                                                <div class="font-manrope font-bold text-sm text-charcoal group-hover:text-teal transition-colors leading-snug line-clamp-2"><?php the_title(); ?></div>
-                                                <div class="text-xs text-textmuted mt-1"><?php echo get_the_date(); ?></div>
+                                                <div class="font-manrope font-bold text-sm text-charcoal dark:text-gray-200 group-hover:text-teal dark:group-hover:text-teal transition-colors leading-snug line-clamp-2"><?php the_title(); ?></div>
+                                                <div class="text-xs text-textmuted dark:text-gray-500 mt-1"><?php echo get_the_date(); ?></div>
                                             </div>
                                         </a>
                                     <?php endwhile; wp_reset_postdata(); ?>
                                 </div>
-                                <a href="<?php echo esc_url(get_category_link($primary_cat)); ?>" class="block text-center mt-5 py-2.5 rounded-xl border border-bordercolor text-charcoal font-manrope font-bold text-xs hover:border-teal hover:text-teal transition-all">
+                                <a href="<?php echo esc_url(get_category_link($primary_cat)); ?>" class="block text-center mt-5 py-2.5 rounded-xl border border-bordercolor dark:border-gray-700 text-charcoal dark:text-gray-300 font-manrope font-bold text-xs hover:border-teal dark:hover:border-teal hover:text-teal transition-all">
                                     View All <?php echo esc_html($primary_cat->name); ?> Articles
                                 </a>
                             </div>
@@ -334,17 +334,17 @@ while (have_posts()): the_post();
         ));
         if ($continue_reading->have_posts()):
         ?>
-            <section class="py-14 md:py-16 bg-offwhite border-t border-bordercolor">
+            <section class="py-14 md:py-16 bg-offwhite dark:bg-[#141A25] border-t border-bordercolor dark:border-gray-800">
                 <div class="max-w-[1280px] mx-auto px-4 md:px-8">
-                    <h2 class="text-2xl md:text-3xl font-manrope font-extrabold text-charcoal mb-8">Continue Reading</h2>
+                    <h2 class="text-2xl md:text-3xl font-manrope font-extrabold text-charcoal dark:text-white mb-8">Continue Reading</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <?php while ($continue_reading->have_posts()): $continue_reading->the_post();
                             $cr_cats = get_the_category();
                             $cat_name = !empty($cr_cats) ? $cr_cats[0]->name : 'WordPress';
                         ?>
-                            <article <?php post_class('bg-white rounded-2xl border border-bordercolor overflow-hidden flex flex-col justify-between relative transition-colors hover:border-bordercolor-hover group/card'); ?>>
+                            <article <?php post_class('bg-white dark:bg-gray-800 rounded-2xl border border-bordercolor dark:border-gray-700 overflow-hidden flex flex-col justify-between relative transition-colors hover:border-bordercolor-hover dark:hover:border-gray-500 group/card'); ?>>
                                 <div>
-                                    <div class="relative aspect-[16/9] overflow-hidden bg-teal-light border-b border-bordercolor/50">
+                                    <div class="relative aspect-[16/9] overflow-hidden bg-teal-light border-b border-bordercolor/50 dark:border-gray-700">
                                         <?php if (has_post_thumbnail()): ?>
                                             <?php the_post_thumbnail('medium_large', array('class' => 'w-full h-full object-cover relative z-0', 'loading' => 'lazy')); ?>
                                         <?php else: ?>
@@ -355,15 +355,15 @@ while (have_posts()): the_post();
                                         <span class="absolute top-3 left-3 bg-teal text-white text-[10px] font-manrope font-extrabold uppercase px-2.5 py-1 rounded z-20"><?php echo esc_html($cat_name); ?></span>
                                     </div>
                                     <div class="p-6">
-                                        <h3 class="font-manrope font-bold text-xl text-charcoal group-hover/card:text-teal transition-colors leading-snug">
+                                        <h3 class="font-manrope font-bold text-xl text-charcoal dark:text-white group-hover/card:text-teal transition-colors leading-snug">
                                             <a href="<?php the_permalink(); ?>" class="before:absolute before:inset-0 before:z-30 hover:underline"><?php the_title(); ?></a>
                                         </h3>
-                                        <p class="font-inter text-textmuted text-sm mt-3 line-clamp-2"><?php echo wp_trim_words(get_the_excerpt(), 18); ?></p>
+                                        <p class="font-inter text-textmuted dark:text-gray-400 text-sm mt-3 line-clamp-2"><?php echo wp_trim_words(get_the_excerpt(), 18); ?></p>
                                     </div>
                                 </div>
-                                <div class="px-6 pb-6 pt-2 border-t border-bordercolor/60 flex items-center justify-between text-xs text-textmuted">
+                                <div class="px-6 pb-6 pt-2 border-t border-bordercolor/60 dark:border-gray-700 flex items-center justify-between text-xs text-textmuted dark:text-gray-400">
                                     <span class="font-medium"><?php echo get_the_date(); ?></span>
-                                    <span class="font-semibold text-charcoal bg-offwhite px-2 py-0.5 rounded"><?php echo (int) wp_gyani_reading_time(); ?> min read</span>
+                                    <span class="font-semibold text-charcoal dark:text-gray-200 bg-offwhite dark:bg-gray-700 px-2 py-0.5 rounded"><?php echo (int) wp_gyani_reading_time(); ?> min read</span>
                                 </div>
                             </article>
                         <?php endwhile; wp_reset_postdata(); ?>

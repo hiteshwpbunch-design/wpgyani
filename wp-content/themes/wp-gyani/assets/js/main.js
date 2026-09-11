@@ -7,7 +7,7 @@ function filterArticles(category) {
     btns.forEach(id => {
         const btn = document.getElementById(id);
         if (btn) {
-            btn.className = "px-4 py-2 rounded-lg text-xs font-manrope font-bold transition-all text-textmuted hover:text-charcoal hover:bg-teal-light";
+            btn.className = "px-4 py-2 rounded-lg text-xs font-manrope font-bold transition-all text-textmuted dark:text-gray-400 hover:text-charcoal dark:hover:text-white hover:bg-teal-light dark:hover:bg-gray-700";
         }
     });
     const activeBtn = document.getElementById('btn-' + category);
@@ -48,35 +48,56 @@ function applySearchTag(tag) {
 function handleSearch(query) {
     const suggestions = document.getElementById('search-suggestions');
     const results = document.getElementById('search-results');
+    
     if (!query.trim()) {
         suggestions.classList.remove('hidden');
         results.classList.add('hidden');
         return;
     }
+    
     suggestions.classList.add('hidden');
     results.classList.remove('hidden');
-    const dummyData = [
-        { title: "How to Speed Up Your WordPress Website (Core Web Vitals Guide)", cat: "Speed" },
-        { title: "Complete Elementor Pro Beginner Guide 2026", cat: "Elementor" },
-        { title: "WordPress On-Page SEO Checklist for Higher Google Rankings", cat: "SEO" },
-        { title: "How to Fix Common WordPress Database Connection Errors", cat: "Database" }
-    ];
-    const filtered = dummyData.filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase()) ||
-        item.cat.toLowerCase().includes(query.toLowerCase())
-    );
-    if (filtered.length > 0) {
-        results.innerHTML = filtered.map(item => '<div onclick="openArticleModal(\'' + item.title + '\', \'' + item.cat + '\')" class="p-3 bg-offwhite hover:bg-teal-light rounded-xl cursor-pointer transition-colors border border-bordercolor flex items-center justify-between"><div><span class="text-[10px] font-bold text-teal uppercase">' + item.cat + '</span><div class="font-manrope font-bold text-sm text-charcoal">' + item.title + '</div></div><span class="text-xs text-teal font-bold">&rarr;</span></div>').join('');
-    } else {
-        results.innerHTML = '<div class="text-center text-textmuted text-sm py-4">No tutorials found for "' + query + '". Try searching for \'Speed\' or \'Elementor\'.</div>';
-    }
+    results.innerHTML = '<div class="text-center text-textmuted text-sm py-4">Searching...</div>';
+
+    // AJAX request to WordPress
+    const formData = new URLSearchParams();
+    formData.append('action', 'wpgyani_search');
+    formData.append('query', query);
+
+    fetch(wpgyani_ajax.ajax_url, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(res => {
+        if (res.success && res.data && res.data.length > 0) {
+            results.innerHTML = res.data.map(item => 
+                `<div onclick="openArticleModal('${item.title.replace(/'/g, "\\'")}', '${item.cat}', '${item.url}')" class="p-3 bg-offwhite dark:bg-gray-800 hover:bg-teal-light dark:hover:bg-gray-700 rounded-xl cursor-pointer transition-colors border border-bordercolor dark:border-gray-700 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-teal uppercase">${item.cat}</span>
+                        <div class="font-manrope font-bold text-sm text-charcoal dark:text-white">${item.title}</div>
+                    </div>
+                    <span class="text-xs text-teal font-bold">&rarr;</span>
+                </div>`
+            ).join('');
+        } else {
+            results.innerHTML = `<div class="text-center text-textmuted text-sm py-4">No tutorials found for "${query}". Try another keyword.</div>`;
+        }
+    })
+    .catch(error => {
+        console.error("Search error:", error);
+        results.innerHTML = '<div class="text-center text-red-500 text-sm py-4">An error occurred while searching.</div>';
+    });
 }
 
 // Article Modal Drawer
-function openArticleModal(title, category) {
+function openArticleModal(title, category, url) {
     closeSearchModal();
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-category').innerText = category.toUpperCase();
+    if(url) {
+        document.getElementById('modal-link').href = url;
+    }
     document.getElementById('article-modal').classList.remove('hidden');
 }
 

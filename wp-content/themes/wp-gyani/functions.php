@@ -39,14 +39,17 @@ function wp_gyani_scripts() {
     wp_enqueue_script('scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), '3.12.2', true);
     wp_enqueue_script('wp-gyani-main', get_template_directory_uri() . '/assets/js/main.js', array('tailwindcss', 'gsap', 'scrolltrigger'), '1.0.0', true);
     
+    // Pass AJAX URL to JS
+    wp_localize_script('wp-gyani-main', 'wpgyani_ajax', array(
+        'ajax_url' => admin_url('admin-ajax.php')
+    ));
+    
     wp_add_inline_script('tailwindcss', "
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        white: 'var(--color-bg-white)',
-                        black: 'var(--color-text-heading)',
                         teal: {
                             DEFAULT: '#4EAAA7',
                             dark: '#408F8C',
@@ -86,6 +89,44 @@ function wp_gyani_scripts() {
     ");
 }
 add_action('wp_enqueue_scripts', 'wp_gyani_scripts');
+
+// AJAX Search Handler
+function wpgyani_ajax_search() {
+    $search_term = isset($_POST['query']) ? sanitize_text_field($_POST['query']) : '';
+    
+    if (empty($search_term)) {
+        wp_send_json_success(array());
+    }
+
+    $args = array(
+        's' => $search_term,
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'posts_per_page' => 5,
+    );
+
+    $query = new WP_Query($args);
+    $results = array();
+
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $category = get_the_category();
+            $cat_name = !empty($category) ? $category[0]->name : 'Tutorial';
+            
+            $results[] = array(
+                'title' => get_the_title(),
+                'url' => get_permalink(),
+                'cat' => $cat_name
+            );
+        }
+        wp_reset_postdata();
+    }
+
+    wp_send_json_success($results);
+}
+add_action('wp_ajax_wpgyani_search', 'wpgyani_ajax_search');
+add_action('wp_ajax_nopriv_wpgyani_search', 'wpgyani_ajax_search');
 
 function wp_gyani_customizer_register($wp_customize) {
     $wp_customize->add_section('wp_gyani_hero', array(
@@ -139,102 +180,6 @@ function wp_gyani_fallback_menu() {
     echo '</ul>';
 }
 
-/**
- * SEO: meta description, canonical URL, Open Graph / Twitter tags, and
- * rel=prev/next pagination hints for category archive ("inner") pages.
- *
- * WordPress core only auto-prints a canonical tag for singular posts/pages,
- * so category archives need their own — this fills that gap and keeps
- * paginated pages (page 2, 3...) from competing with page 1 in the index.
- */
-function wp_gyani_category_seo_meta() {
-    if (!is_category()) {
-        return;
-    }
-
-    $term = get_queried_object();
-    if (!$term || is_wp_error($term)) {
-        return;
-    }
-
-    $paged = get_query_var('paged') ? (int) get_query_var('paged') : 1;
-
-    $raw_desc = category_description($term->term_id);
-    $description = $raw_desc
-        ? wp_trim_words(wp_strip_all_tags($raw_desc), 30)
-        : sprintf(
-            'Browse %d %s tutorials and guides on WP Gyani. Practical, step-by-step WordPress articles to help you build, optimize, and troubleshoot faster.',
-            (int) $term->count,
-            $term->name
-        );
-
-    if ($paged > 1) {
-        $description = sprintf('Page %d — %s', $paged, $description);
-    }
-
-    $canonical = $paged > 1 ? get_pagenum_link($paged) : get_category_link($term->term_id);
-    $title     = $term->name . ' Tutorials & Guides' . ($paged > 1 ? ' - Page ' . $paged : '') . ' - WP Gyani';
-
-    echo "\n<!-- WP Gyani SEO Meta -->\n";
-    printf('<meta name="description" content="%s">' . "\n", esc_attr($description));
-    printf('<link rel="canonical" href="%s">' . "\n", esc_url($canonical));
-    printf('<meta property="og:type" content="website">' . "\n");
-    printf('<meta property="og:title" content="%s">' . "\n", esc_attr($title));
-    printf('<meta property="og:description" content="%s">' . "\n", esc_attr($description));
-    printf('<meta property="og:url" content="%s">' . "\n", esc_url($canonical));
-    printf('<meta name="twitter:card" content="summary_large_image">' . "\n");
-    printf('<meta name="twitter:title" content="%s">' . "\n", esc_attr($title));
-    printf('<meta name="twitter:description" content="%s">' . "\n", esc_attr($description));
-
-    if ($paged > 1) {
-        // Thin, duplicate-ish paginated pages shouldn't fight page 1 for rankings,
-        // but should still be crawled so linked posts get discovered.
-        echo '<meta name="robots" content="noindex,follow">' . "\n";
-    }
-
-    global $wp_query;
-    if (!empty($wp_query->max_num_pages) && $wp_query->max_num_pages > 1) {
-        if ($paged > 1) {
-            printf('<link rel="prev" href="%s">' . "\n", esc_url(get_pagenum_link($paged - 1)));
-        }
-        if ($paged < $wp_query->max_num_pages) {
-            printf('<link rel="next" href="%s">' . "\n", esc_url(get_pagenum_link($paged + 1)));
-        }
-    }
-}
-add_action('wp_head', 'wp_gyani_category_seo_meta', 5);
-
-/**
- * SEO: Open Graph / Twitter tags for single posts.
- * (Canonical URL is already handled by WordPress core for singular posts.)
- */
-function wp_gyani_single_post_seo_meta() {
-    if (!is_singular('post')) {
-        return;
-    }
-
-    $description = has_excerpt()
-        ? wp_strip_all_tags(get_the_excerpt())
-        : wp_trim_words(wp_strip_all_tags(get_the_content()), 30);
-
-    $image = has_post_thumbnail() ? get_the_post_thumbnail_url(get_the_ID(), 'large') : '';
-
-    echo "\n<!-- WP Gyani SEO Meta -->\n";
-    printf('<meta name="description" content="%s">' . "\n", esc_attr($description));
-    printf('<meta property="og:type" content="article">' . "\n");
-    printf('<meta property="og:title" content="%s">' . "\n", esc_attr(get_the_title()));
-    printf('<meta property="og:description" content="%s">' . "\n", esc_attr($description));
-    printf('<meta property="og:url" content="%s">' . "\n", esc_url(get_permalink()));
-    if ($image) {
-        printf('<meta property="og:image" content="%s">' . "\n", esc_url($image));
-    }
-    printf('<meta property="article:published_time" content="%s">' . "\n", esc_attr(get_the_date('c')));
-    printf('<meta property="article:modified_time" content="%s">' . "\n", esc_attr(get_the_modified_date('c')));
-    printf('<meta name="twitter:card" content="%s">' . "\n", $image ? 'summary_large_image' : 'summary');
-    printf('<meta name="twitter:title" content="%s">' . "\n", esc_attr(get_the_title()));
-    printf('<meta name="twitter:description" content="%s">' . "\n", esc_attr($description));
-}
-add_action('wp_head', 'wp_gyani_single_post_seo_meta', 5);
 
 /**
  * Custom comment markup used by comments.php (passed to wp_list_comments()
@@ -245,21 +190,21 @@ function wp_gyani_comment_callback($comment, $args, $depth) {
     $tag = ('div' === $args['style']) ? 'div' : 'li';
     ?>
     <<?php echo esc_attr($tag); ?> <?php comment_class($depth > 1 ? 'ml-6 md:ml-12 mt-4' : 'mt-4'); ?> id="comment-<?php comment_ID(); ?>">
-        <article id="div-comment-<?php comment_ID(); ?>" class="p-5 md:p-6 rounded-2xl bg-white border border-bordercolor">
+        <article id="div-comment-<?php comment_ID(); ?>" class="p-5 md:p-6 rounded-2xl bg-white dark:bg-gray-800 border border-bordercolor dark:border-gray-700">
             <?php if ('0' == $comment->comment_approved): ?>
-                <p class="text-xs font-semibold text-teal-dark bg-teal-light inline-block px-3 py-1 rounded-lg mb-3">Your comment is awaiting moderation.</p>
+                <p class="text-xs font-semibold text-teal-dark dark:text-teal bg-teal-light dark:bg-teal-900/50 inline-block px-3 py-1 rounded-lg mb-3">Your comment is awaiting moderation.</p>
             <?php endif; ?>
             <div class="flex items-start gap-3">
-                <?php echo get_avatar($comment, 44, '', '', array('class' => 'rounded-full border border-bordercolor flex-shrink-0')); ?>
+                <?php echo get_avatar($comment, 44, '', '', array('class' => 'rounded-full border border-bordercolor dark:border-gray-700 flex-shrink-0')); ?>
                 <div class="flex-1 min-w-0">
                     <div class="flex flex-wrap items-baseline gap-x-2">
-                        <span class="font-manrope font-bold text-sm text-charcoal"><?php comment_author(); ?></span>
-                        <a href="<?php echo esc_url(get_comment_link($comment, $args)); ?>" class="text-xs text-textmuted hover:text-teal transition-colors">
+                        <span class="font-manrope font-bold text-sm text-charcoal dark:text-white"><?php comment_author(); ?></span>
+                        <a href="<?php echo esc_url(get_comment_link($comment, $args)); ?>" class="text-xs text-textmuted dark:text-gray-400 hover:text-teal transition-colors">
                             <?php echo esc_html(get_comment_date('', $comment)); ?> at <?php echo esc_html(get_comment_time()); ?>
                         </a>
-                        <?php edit_comment_link(__('Edit'), '<span class="text-xs text-textmuted">&bull; </span><span class="text-xs text-teal font-semibold hover:text-teal-dark">', '</span>'); ?>
+                        <?php edit_comment_link(__('Edit'), '<span class="text-xs text-textmuted dark:text-gray-400">&bull; </span><span class="text-xs text-teal font-semibold hover:text-teal-dark">', '</span>'); ?>
                     </div>
-                    <div class="font-inter text-sm text-charcoal leading-relaxed mt-2 comment-text">
+                    <div class="font-inter text-sm text-charcoal dark:text-gray-300 leading-relaxed mt-2 comment-text">
                         <?php comment_text(); ?>
                     </div>
                     <div class="mt-2">
@@ -402,3 +347,15 @@ function wp_gyani_category_image_admin_scripts($hook) {
     }
 }
 add_action('admin_enqueue_scripts', 'wp_gyani_category_image_admin_scripts');
+
+// Include custom meta boxes for About Us page
+require_once get_template_directory() . '/inc/meta-boxes-about.php';
+
+// Fix WebP upload error on servers without WebP GD support
+add_filter('file_is_displayable_image', function($result, $path) {
+    if (pathinfo($path, PATHINFO_EXTENSION) === 'webp') {
+        return false;
+    }
+    return $result;
+}, 10, 2);
+

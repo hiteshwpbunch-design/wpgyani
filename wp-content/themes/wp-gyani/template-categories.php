@@ -10,31 +10,33 @@ get_header();
 
 <main id="primary" class="site-main">
     <!-- PAGE HERO SECTION -->
-    <section class="bg-offwhite pt-12 pb-12 border-b border-bordercolor">
-        <div class="max-w-[1280px] mx-auto px-4 md:px-8">
+    <section class="relative bg-gradient-to-br from-teal-light via-white to-teal-subtle dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-12 pb-12 border-b border-bordercolor dark:border-gray-800 overflow-hidden">
+        <!-- Subtle Background Dot Pattern -->
+        <div class="absolute inset-0 opacity-[0.03] dark:opacity-10 pointer-events-none" style="background-image: radial-gradient(#333333 1px, transparent 1px); background-size: 24px 24px;"></div>
+        <div class="max-w-[1280px] mx-auto px-4 md:px-8 relative z-10">
             <!-- Breadcrumb -->
             <nav aria-label="Breadcrumb" class="mb-6">
-                <ol class="flex items-center gap-2 text-sm font-medium text-textmuted">
+                <ol class="flex items-center gap-2 text-sm font-medium text-textmuted dark:text-gray-400">
                     <li>
                         <a href="<?php echo esc_url(home_url('/')); ?>" class="hover:text-teal transition-colors">Home</a>
                     </li>
-                    <li class="text-gray-300">/</li>
-                    <li class="text-charcoal font-semibold">Categories</li>
+                    <li class="text-gray-300 dark:text-gray-600">/</li>
+                    <li class="text-charcoal dark:text-gray-200 font-semibold">Categories</li>
                 </ol>
             </nav>
 
             <span class="text-xs font-bold font-manrope uppercase tracking-widest text-teal mb-3 block">EXPLORE TOPICS</span>
-            <h1 class="font-manrope font-extrabold text-4xl sm:text-5xl text-charcoal leading-tight tracking-tight mb-4">
+            <h1 class="font-manrope font-extrabold text-4xl sm:text-5xl text-charcoal dark:text-white leading-tight tracking-tight mb-4">
                 <?php the_title(); ?>
             </h1>
-            <p class="font-inter text-textmuted text-base max-w-2xl">
+            <p class="font-inter text-textmuted dark:text-gray-400 text-base max-w-2xl">
                 Browse our entire library of WordPress tutorials, guides, and resources organized by topic.
             </p>
         </div>
     </section>
 
     <!-- CATEGORIES GRID -->
-    <section class="py-16 md:py-24 bg-white">
+    <section class="py-16 md:py-24 bg-white dark:bg-transparent">
         <div class="max-w-[1280px] mx-auto px-4 md:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <?php
