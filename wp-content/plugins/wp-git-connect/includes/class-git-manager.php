@@ -79,7 +79,7 @@ class Git_Manager {
 		}
 
 		foreach ( $files as $file ) {
-			$add_result = Git_Command::execute( 'add', array( $file ) );
+			$add_result = Git_Command::execute( 'add', array( ':/' . ltrim( $file, '/' ) ) );
 			if ( ! $add_result['status'] ) {
 				return array( 'status' => false, 'message' => "Failed to add file {$file}: " . $add_result['error'] );
 			}
@@ -117,7 +117,7 @@ class Git_Manager {
 	 * Get file diff.
 	 */
 	public static function get_diff( $file ) {
-		$result = Git_Command::execute( 'diff', array( $file ) );
+		$result = Git_Command::execute( 'diff', array( ':/' . ltrim( $file, '/' ) ) );
 		if ( $result['status'] ) {
 			return array( 'status' => true, 'diff' => $result['output'] );
 		}
