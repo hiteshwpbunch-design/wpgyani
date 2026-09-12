@@ -56,7 +56,7 @@ class Git_Command {
 		);
 
 		$cwd = $repo_path;
-		$env = ! empty( $env_vars ) ? array_merge( $_ENV, $env_vars ) : null;
+		$env = ! empty( $env_vars ) ? array_merge( getenv(), $env_vars ) : null;
 
 		$process = proc_open( $cmd, $descriptorspec, $pipes, $cwd, $env );
 
