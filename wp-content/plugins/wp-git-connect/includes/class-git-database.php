@@ -65,7 +65,21 @@ class Git_Database {
 			2 => array( "pipe", "w" )
 		);
 
+		// Remove PAT token temporarily before dump to prevent leaking it in the SQL file
+		$pat_token_backup = isset( $settings['pat_token'] ) ? $settings['pat_token'] : '';
+		if ( ! empty( $pat_token_backup ) ) {
+			$settings['pat_token'] = '';
+			update_option( 'wp_git_connect_settings', $settings );
+		}
+
 		$process = proc_open( $cmd_raw, $descriptorspec, $pipes );
+
+		// Restore token after dump
+		if ( ! empty( $pat_token_backup ) ) {
+			$settings = get_option( 'wp_git_connect_settings', array() );
+			$settings['pat_token'] = $pat_token_backup;
+			update_option( 'wp_git_connect_settings', $settings );
+		}
 
 		if ( is_resource( $process ) ) {
 			$stderr = stream_get_contents( $pipes[2] );
