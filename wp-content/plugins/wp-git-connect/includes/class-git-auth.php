@@ -61,7 +61,7 @@ class Git_Auth {
 	 * @return array Array of environment variables.
 	 */
 	public static function get_git_env() {
-		$env = array();
+		$env = array( 'GIT_TERMINAL_PROMPT' => '0', 'GCM_INTERACTIVE' => 'false' );
 		$settings = get_option( 'wp_git_connect_settings', array() );
 		$auth_method = isset( $settings['auth_method'] ) ? $settings['auth_method'] : 'none';
 
