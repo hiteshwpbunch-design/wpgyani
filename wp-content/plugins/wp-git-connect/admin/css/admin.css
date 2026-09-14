@@ -1,0 +1,72 @@
+/* WP Git Connect Admin CSS */
+
+.wpgc-wrap {
+
+	max-width: 1200px;
+	margin: 20px 20px 20px 0px;
+}
+
+.wpgc-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.wpgc-card {
+	background: #fff;
+	border: 1px solid #ccd0d4;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.wpgc-badge {
+	display: inline-block;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-weight: 600;
+	font-size: 12px;
+}
+
+.wpgc-badge.connected {
+	background: #d4edda;
+	color: #155724;
+}
+
+.wpgc-badge.disconnected {
+	background: #f8d7da;
+	color: #721c24;
+}
+
+.wpgc-file-list {
+	list-style: none;
+	padding: 0;
+}
+
+.wpgc-file-list li {
+	padding: 8px;
+	border-bottom: 1px solid #eee;
+	display: flex;
+	align-items: center;
+}
+
+.wpgc-file-list li label {
+	margin-left: 10px;
+	word-break: break-all;
+}
+
+.wpgc-loader {
+	display: none;
+	margin-left: 10px;
+}
+
+.wpgc-loading .wpgc-loader {
+	display: inline-block;
+}
+
+.wpgc-status-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}

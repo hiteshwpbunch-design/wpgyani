@@ -1,0 +1,29 @@
+# WordPress
+wp-content/cache/
+wp-content/uploads/
+wp-content/upgrade/
+
+# Logs
+*.log
+debug.log
+
+# Environment
+.env
+.env.*
+wp-config.php
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+vendor/
+
+# Temporary
+*.tmp
+*.temp
